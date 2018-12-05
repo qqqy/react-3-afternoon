@@ -18,10 +18,16 @@ export default class Compose extends Component {
 
   updateText( text ) {
     this.setState({ text });
+    // console.log(text)
   }
 
   createPost() {
-
+    let { text } = this.state
+    console.log(text)
+    this.props.createPostFn(text)
+    this.setState({
+      text: ''
+    })
   }
 
   render() {
@@ -40,7 +46,8 @@ export default class Compose extends Component {
           <input className="Compose__input"
                  placeholder="What's on your mind?"
                  value={ text }
-                 onChange={ ( e ) => this.updateText( e.target.value ) } />
+                 onChange={ ( e ) => this.updateText( e.target.value ) } 
+                 onKeyPress={e => {e.charCode === 13 ? this.createPost() : console.log('berJangles!')}} />
 
         </div>
 
